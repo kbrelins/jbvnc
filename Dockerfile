@@ -1,9 +1,9 @@
 FROM alpine:3.19
 
 LABEL AboutImage "Home Assistant Dashboard trough VNC"
-
 #Locale
-	LANG=en_US.UTF-8 \
+
+ENV LANG=en_US.UTF-8 \
 	LANGUAGE=en_US.UTF-8 \
 	LC_ALL=C.UTF-8 \
 	TZ="UTC"
@@ -34,17 +34,14 @@ COPY config /config
 
 #VNC Resolution(720p is preferable)
 # 768x1024 is iPad2
-	VNC_RESOLUTION="768x1024"
-  
+ENV	VNC_RESOLUTION="768x1024" \
 #VNC Server Title(w/o spaces)
-	VNC_TITLE="Home Assistant Dashboard" \
-
+VNC_TITLE="Home Assistant Dashboard" \
 #Local Display Server Port
-	DISPLAY=:0 \
-
+DISPLAY=:0 \
 #NoVNC Port
-	NOVNC_PORT=$PORT \
-	PORT=8080 \
+NOVNC_PORT=$PORT \
+PORT=8080
 
 CMD ["supervisord", "-l", "/var/log/supervisord.log", "-c","/config/supervisord.conf"]
 #CMD ["bash", "-c", "/usr/bin/chrome-novnc.sh"]
