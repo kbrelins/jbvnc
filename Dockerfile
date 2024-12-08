@@ -9,9 +9,7 @@ ENV LANG=en_US.UTF-8 \
 	TZ="UTC"
 
 RUN	apk update && \
-	apk add --no-cache tzdata ca-certificates supervisor curl wget openssl bash python3 py3-requests sed unzip xvfb x11vnc websockify openbox chromium nss alsa-lib font-noto font-noto-cjk
-# noVNC SSL certificate
-RUN	openssl req -new -newkey rsa:4096 -days 36500 -nodes -x509 -subj "/C=IN/O=Dis/CN=www.google.com" -keyout /etc/ssl/novnc.key -out /etc/ssl/novnc.cert > /dev/null 2>&1
+	apk add --no-cache tzdata ca-certificates supervisor curl wget openssl bash python3 py3-requests sed unzip xvfb tigervnc websockify openbox chromium nss alsa-lib font-noto font-noto-cjk
 # TimeZone
 RUN	cp /usr/share/zoneinfo/$TZ /etc/localtime && \
 	echo $TZ > /etc/timezone
