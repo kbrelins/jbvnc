@@ -27,8 +27,8 @@ RUN git clone -c http.sslVerify=false --branch $NOVNC_VERSION https://github.com
 RUN apk add procps
 
 COPY chrome-novnc.sh /usr/bin/chrome-novnc.sh
-RUN ln -s /opt/novnc/vnc.html /opt/novnc/index.html && \
-    chmod +x /usr/bin/chrome-novnc.sh
+COPY index.html /opt/novnc/index.html
+RUN chmod +x /usr/bin/chrome-novnc.sh
 
 COPY config /config
 
